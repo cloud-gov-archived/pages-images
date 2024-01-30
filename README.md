@@ -1,11 +1,23 @@
-concourse-dcind
-===============
+pages-images
+============
 
-A Concourse CI resources type to run Docker Compose in Docker
+A series of common container images used in the cloud.gov Pages system.
 
 ## Why this project
 
-Systems, apps, and tools developed and tested using Docker Compose can also be run using Docker Compose from within a Concourse CI task.
+Pages relies on Concourse CI and CloudFoundry Apps to deliver and serve the platform's different components. This is a centralized repository to hold all of the commonly used images which are hardened and scanned using the cloud.gov [common-pipelines](https://github.com/cloud-gov/common-pipelines) container hardening CI framework.
+
+## How this works
+
+Create a directory in the root of the repository for the name of the image and then a subdirectory for the images's version. To create a Node v20 image, create the directories `./node/v20` and then add the `Dockerfile` and any other supporting scripts under the image version directory.
+
+All Dockerfiles will take the `ARG base_image` argument which is a hardened Ubuntu Jammy image based the [common-pipelines OCI Pipeline](https://github.com/cloud-gov/common-pipelines/blob/feat-add-pages-pipeline/container/README.md).
+
+## Current Images
+
+- `dind`: "Docker in Docker" is used to run a CI tasks that leverage docker compose to run linting, compilation, tests, etc. of the source code.
+
+- `node`: The base Node.js image used by the Pages API
 
 ## Contributing
 
