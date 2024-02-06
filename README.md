@@ -13,6 +13,29 @@ Create a directory in the root of the repository for the name of the image and t
 
 All Dockerfiles will take the `ARG base_image` argument which is a hardened Ubuntu Jammy image based the [common-pipelines OCI Pipeline](https://github.com/cloud-gov/common-pipelines/blob/main/container/README.md).
 
+### Registering a new image
+
+To add a new image to `pages-images` you will also need to create a new ECR repository for the common pipeline image put step to use. Add the name of the repository to the [repositories list](https://github.com/cloud-gov/cg-provision/blob/main/terraform/stacks/ecr/stack.tf) in Terraform and make sure the update has been applied.
+
+### Running Locally
+
+To get up and running quickly, you can build an image locally using the Ubuntu Jammy (v22.04) image as your `base_image`.
+
+```sh
+# Navigate into the directory of the image and version you want to build
+# Use the general Ubuntu Jammy base image for local development
+docker buildx build . -t <image-tag> --build-arg base_image=ubuntu:22.04
+```
+
+A hardened version of the Ubuntu Jammy image is used as the base image to build the Pages images in CI. To download a hardened image to your local machine, you will need to pull the following credentials from Credhub:
+- AWS Access Key
+- AWS Secret Key
+- Repository Name
+- Tag
+- AWS Region
+
+You will need to then authenticate and follow AWS's instructions for [private registry authentication](https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry_auth.html). After you have authenticated, you will be able to pull the hardened image.
+
 ## Current Images
 
 - `dind`: "Docker in Docker" is used to run a CI tasks that leverage docker compose to run linting, compilation, tests, etc. of the source code.
