@@ -11,7 +11,7 @@ Pages relies on Concourse CI and CloudFoundry Apps to deliver and serve the plat
 
 Create a directory in the root of the repository for the name of the image and then a subdirectory for the images's version. To create a Node v20 image, create the directories `./node/v20` and then add the `Dockerfile` and any other supporting scripts under the image version directory.
 
-All Dockerfiles will take the `ARG base_image` argument which is a hardened Ubuntu Jammy image based the [common-pipelines OCI Pipeline](https://github.com/cloud-gov/common-pipelines/blob/feat-add-pages-pipeline/container/README.md).
+All Dockerfiles will take the `ARG base_image` argument which is a hardened Ubuntu Jammy image based the [common-pipelines OCI Pipeline](https://github.com/cloud-gov/common-pipelines/blob/main/container/README.md).
 
 ## Current Images
 
