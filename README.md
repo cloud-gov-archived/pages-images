@@ -36,6 +36,10 @@ A hardened version of the Ubuntu Jammy image is used as the base image to build 
 
 You will need to then authenticate and follow AWS's instructions for [private registry authentication](https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry_auth.html). After you have authenticated, you will be able to pull the hardened image.
 
+## CI
+
+The cloud.gov [common-pipelines](https://github.com/cloud-gov/common-pipelines) are set by the [container pipeline](https://github.com/cloud-gov/common-pipelines/blob/main/ci/container/pipeline.yml) in the platform team's CI space and each image pipeline is set in the Pages team CI space based on the [pipeline-pages.yml](https://github.com/cloud-gov/common-pipelines/blob/main/container/pipeline-pages.yml) template. The images must build and complete the USG audit, security scan, CVE check, and software inventory. The image pipelines are available to Pages team members and named after the use and version ie `node-v20`.
+
 ## Current Images
 
 - `dind`: "Docker in Docker" is used to run a CI tasks that leverage docker compose to run linting, compilation, tests, etc. of the source code.
