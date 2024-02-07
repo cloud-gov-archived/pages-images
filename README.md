@@ -46,6 +46,8 @@ The cloud.gov [common-pipelines](https://github.com/cloud-gov/common-pipelines) 
 
 - `node`: The base Node.js image used by the Pages API
 
+- `python`: The base Python image
+
 ## Contributing
 
 See [CONTRIBUTING](CONTRIBUTING.md) for additional information.
