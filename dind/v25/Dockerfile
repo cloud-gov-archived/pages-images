@@ -227,7 +227,7 @@ RUN set -eux; \
 	wget -O /usr/local/bin/dind "https://raw.githubusercontent.com/docker/docker/${DIND_COMMIT}/hack/dind"; \
 	chmod +x /usr/local/bin/dind
 
-COPY modprobe.sh /usr/local/bin/modprobe
+COPY modprobe.sh /usr/local/bin/
 COPY docker-entrypoint.sh /usr/local/bin/
 COPY dockerd-entrypoint.sh /usr/local/bin/
 
