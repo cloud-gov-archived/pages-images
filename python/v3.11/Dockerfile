@@ -21,6 +21,7 @@ RUN set -eux; \
 	apt-get install -y --no-install-recommends \
         build-essential \
         ca-certificates \
+		curl \
         iptables \
 		libbluetooth-dev \
         libncurses5-dev \
@@ -31,6 +32,7 @@ RUN set -eux; \
         libffi-dev \
         libsqlite3-dev \
         libbz2-dev \
+		libpq-dev \
         openssl \
 		tk-dev \
 		uuid-dev \
