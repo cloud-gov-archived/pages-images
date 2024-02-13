@@ -8,6 +8,7 @@ FROM ${base_image}
 # Set to skip prompt during USG audit
 ENV DEBIAN_FRONTEND=noninteractive
 
+
 ENV DOCKER_COMPOSE_VERSION 2.24.5
 ENV DOCKER_VERSION 25.0.1
 ENV DOCKER_BUILDX_VERSION 0.12.1
