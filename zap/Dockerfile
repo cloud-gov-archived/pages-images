@@ -112,8 +112,6 @@ RUN chown -R 1000:1000 /zap
 COPY --link --chown=1000:1000 policies /home/zap/.ZAP/policies/
 RUN usermod --shell /bin/false zap
 
-USER zap
-
 ENV PATH=$JAVA_HOME/bin:/zap/:$PATH
 ENV ZAP_PATH=/zap/zap.sh
 ENV HOME=/home/zap/
