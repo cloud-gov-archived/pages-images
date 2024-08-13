@@ -9,9 +9,9 @@ FROM ${base_image}
 ENV DEBIAN_FRONTEND=noninteractive
 
 
-ENV DOCKER_COMPOSE_VERSION 2.24.5
-ENV DOCKER_VERSION 27.0.3
-ENV DOCKER_BUILDX_VERSION 0.12.1
+ENV DOCKER_COMPOSE_VERSION 2.29.2
+ENV DOCKER_VERSION 27.1.1
+ENV DOCKER_BUILDX_VERSION 0.16.2
 ENV DOCKER_TLS_CERTDIR=/certs
 # https://github.com/docker/docker/tree/master/hack/dind
 ENV DIND_COMMIT 65cfcc28ab37cb75e1560e4b4738719c07c6618e
@@ -32,16 +32,10 @@ RUN set -eux; \
 	sysArch="$(uname -m)"; \
 	case "$sysArch" in \
 	'x86_64') \
-	url='https://download.docker.com/linux/static/stable/x86_64/docker-25.0.1.tgz'; \
-	;; \
-	'armhf') \
-	url='https://download.docker.com/linux/static/stable/armel/docker-25.0.1.tgz'; \
-	;; \
-	'armv7') \
-	url='https://download.docker.com/linux/static/stable/armhf/docker-25.0.1.tgz'; \
+	url="https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_VERSION.tgz"; \
 	;; \
 	'aarch64') \
-	url='https://download.docker.com/linux/static/stable/aarch64/docker-25.0.1.tgz'; \
+	url="https://download.docker.com/linux/static/stable/aarch64/docker-$DOCKER_VERSION.tgz"; \
 	;; \
 	*) echo >&2 "error: unsupported 'docker.tgz' architecture ($sysArch)"; exit 1 ;; \
 	esac; \
@@ -64,32 +58,12 @@ RUN set -eux; \
 	sysArch="$(uname -m)"; \
 	case "$sysArch" in \
 	'x86_64') \
-	url='https://github.com/docker/buildx/releases/download/v0.12.1/buildx-v0.12.1.linux-amd64'; \
-	sha256='716321df8ca9c82ffe96f37e9f4aa1199d4969795836dbd57ef72d12e3ac5085'; \
-	;; \
-	'armhf') \
-	url='https://github.com/docker/buildx/releases/download/v0.12.1/buildx-v0.12.1.linux-arm-v6'; \
-	sha256='4b3c78b59c0383ab21327e2902af2ea317e3b85e442b1cd776f0c2a7bbbb2999'; \
-	;; \
-	'armv7') \
-	url='https://github.com/docker/buildx/releases/download/v0.12.1/buildx-v0.12.1.linux-arm-v7'; \
-	sha256='fe0a9e7812051a72c47d009bf9373e76e23644cc3291c848ac4a9b6f237e9e75'; \
+	url="https://github.com/docker/buildx/releases/download/v$DOCKER_BUILDX_VERSION/buildx-v$DOCKER_BUILDX_VERSION.linux-amd64"; \
+	sha256='43e4c928a0be38ab34e206c82957edfdd54f3e7124f1dadd7779591c3acf77ea'; \
 	;; \
 	'aarch64') \
-	url='https://github.com/docker/buildx/releases/download/v0.12.1/buildx-v0.12.1.linux-arm64'; \
-	sha256='fb72d627f2ee080bba70375c367f4292867821e29ca9a8cf485622f6ede8f436'; \
-	;; \
-	'ppc64le') \
-	url='https://github.com/docker/buildx/releases/download/v0.12.1/buildx-v0.12.1.linux-ppc64le'; \
-	sha256='1c649498d727183d82fb243e08856533ea90e8d63bfcd6f8b23b264dbcf7ea7a'; \
-	;; \
-	'riscv64') \
-	url='https://github.com/docker/buildx/releases/download/v0.12.1/buildx-v0.12.1.linux-riscv64'; \
-	sha256='152e7b423c1ce888eb0a658321eb8c28cc1d09af01acd5c66eddf8474dddf55c'; \
-	;; \
-	's390x') \
-	url='https://github.com/docker/buildx/releases/download/v0.12.1/buildx-v0.12.1.linux-s390x'; \
-	sha256='acee98a9f0550bf2c6c1161cf8067c031ddf0c566c41de7db27847bb72e8ee0b'; \
+	url="https://github.com/docker/buildx/releases/download/v$DOCKER_BUILDX_VERSION/buildx-v$DOCKER_BUILDX_VERSION.linux-arm64"; \
+	sha256='775f1ab64aa0e5d901dcc6ecf6843ec3261f27476873760711aa362b403f61f3'; \
 	;; \
 	*) echo >&2 "warning: unsupported 'docker-buildx' architecture ($sysArch); skipping"; exit 0 ;; \
 	esac; \
@@ -109,32 +83,12 @@ RUN set -eux; \
 	sysArch="$(uname -m)"; \
 	case "$sysArch" in \
 	'x86_64') \
-	url='https://github.com/docker/compose/releases/download/v2.24.5/docker-compose-linux-x86_64'; \
-	sha256='94355be1d1d395040bbda1490f98d5c7627c30798a7955e1f2a78fda33a4b3e1'; \
-	;; \
-	'armhf') \
-	url='https://github.com/docker/compose/releases/download/v2.24.5/docker-compose-linux-armv6'; \
-	sha256='bd402cf44fec9640c29e85184ddd36c9d4094045b296e2833533d53715d0cfc2'; \
-	;; \
-	'armv7') \
-	url='https://github.com/docker/compose/releases/download/v2.24.5/docker-compose-linux-armv7'; \
-	sha256='80248b4c2c407b22b24896ff6d6e766be7ca97239c5b8137f47c81b62a1befb4'; \
+	url="https://github.com/docker/compose/releases/download/v$DOCKER_COMPOSE_VERSION/docker-compose-linux-x86_64"; \
+	sha256='d037bd4937bf18fba67cff4366e084ee125a3e15c25657ee1aeceff8db3672b4'; \
 	;; \
 	'aarch64') \
-	url='https://github.com/docker/compose/releases/download/v2.24.5/docker-compose-linux-aarch64'; \
-	sha256='535e90ff9a7f24384f8a38f9f9ad49125485af7ae5ffda7226d091e5b8126948'; \
-	;; \
-	'ppc64le') \
-	url='https://github.com/docker/compose/releases/download/v2.24.5/docker-compose-linux-ppc64le'; \
-	sha256='2143fd5df30c29e22869e5461afac0ca1f2b8d435c544b89fc1d826eb9e52df8'; \
-	;; \
-	'riscv64') \
-	url='https://github.com/docker/compose/releases/download/v2.24.5/docker-compose-linux-riscv64'; \
-	sha256='e4534c48b1bdf68d664ccc426800b215d3708f3a492d57e36b0a412f4d229546'; \
-	;; \
-	's390x') \
-	url='https://github.com/docker/compose/releases/download/v2.24.5/docker-compose-linux-s390x'; \
-	sha256='7def69d38989d1020c49ab37bb68ab2c29558484e33fc952b5258c84cb1bbda1'; \
+	url="https://github.com/docker/compose/releases/download/v$DOCKER_COMPOSE_VERSION/docker-compose-linux-aarch64"; \
+	sha256='1caa6c39b9df88dbd8522403d78b786a4151fa4e881c866725f75b5d99500a9d'; \
 	;; \
 	*) echo >&2 "warning: unsupported 'docker-compose' architecture ($sysArch); skipping"; exit 0 ;; \
 	esac; \
@@ -193,16 +147,16 @@ RUN set -eux; \
 	sysArch="$(uname -m)"; \
 	case "$sysArch" in \
 	'x86_64') \
-	url='https://download.docker.com/linux/static/stable/x86_64/docker-25.0.1.tgz'; \
+	url="https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_VERSION.tgz"; \
 	;; \
 	'armhf') \
-	url='https://download.docker.com/linux/static/stable/armel/docker-25.0.1.tgz'; \
+	url="https://download.docker.com/linux/static/stable/armel/docker-$DOCKER_VERSION.tgz"; \
 	;; \
 	'armv7') \
-	url='https://download.docker.com/linux/static/stable/armhf/docker-25.0.1.tgz'; \
+	url="https://download.docker.com/linux/static/stable/armhf/docker-$DOCKER_VERSION.tgz"; \
 	;; \
 	'aarch64') \
-	url='https://download.docker.com/linux/static/stable/aarch64/docker-25.0.1.tgz'; \
+	url="https://download.docker.com/linux/static/stable/aarch64/docker-$DOCKER_VERSION.tgz"; \
 	;; \
 	*) echo >&2 "error: unsupported 'docker.tgz' architecture ($sysArch)"; exit 1 ;; \
 	esac; \
@@ -225,7 +179,7 @@ RUN set -eux; \
 	runc --version
 
 RUN set -eux; \
-	wget -O /usr/local/bin/dind "https://raw.githubusercontent.com/docker/docker/${DIND_COMMIT}/hack/dind"; \
+	wget -O /usr/local/bin/dind "https://raw.githubusercontent.com/docker/docker/$DIND_COMMIT/hack/dind"; \
 	chmod +x /usr/local/bin/dind
 
 COPY modprobe.sh /usr/local/bin/
