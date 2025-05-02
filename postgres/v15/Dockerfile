@@ -92,6 +92,9 @@ VOLUME /var/lib/postgresql/data
 # disable postgres user shell
 RUN usermod --shell /bin/false postgres
 
+# remove gosu
+RUN rm -rf /usr/local/bin/gosu
+
 COPY docker-entrypoint.sh /usr/local/bin/
 ENV PATH="${PATH}:/usr/lib/postgresql/$PG_VERSION/bin/"
 ENTRYPOINT ["docker-entrypoint.sh"]
